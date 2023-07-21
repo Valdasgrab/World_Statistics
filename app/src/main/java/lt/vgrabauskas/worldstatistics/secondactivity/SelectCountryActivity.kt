@@ -24,7 +24,6 @@ class SelectCountryActivity : AppCompatActivity() {
 
         initialCountry = intent.getParcelableExtra("selectedCountry")!!
 
-        // Set up the list of countries for comparison (without the initial country)
         countryViewModel = ViewModelProvider(this).get(CountryViewModel::class.java)
         countryViewModel.fetchCountries()
 
@@ -60,21 +59,3 @@ class SelectCountryActivity : AppCompatActivity() {
         super.onDestroy()
     }
 }
-//        countryViewModel.countryLiveData.observe(this) { countries ->
-//            val countriesForComparisonFiltered = countries?.filter { it != initialCountry }
-//            adapter.clear()
-//            if (countriesForComparisonFiltered != null) {
-//                adapter.addAll(countriesForComparisonFiltered.map { country -> country.name } )
-//            }
-//
-//
-//            countriesListView.setOnItemClickListener { _, _, position, _ ->
-//                val selectedCountry = countriesForComparisonFiltered?.get(position)
-//                if (selectedCountry != null) {
-//                    val intent = Intent()
-//                    intent.putExtra("SecondCountry", selectedCountry)
-//                    setResult(RESULT_OK, intent)
-//                    finish()
-//                }
-//            }
-//        }
