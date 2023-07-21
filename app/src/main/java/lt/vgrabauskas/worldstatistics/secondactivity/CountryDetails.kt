@@ -6,7 +6,7 @@ import lt.vgrabauskas.worldstatistics.ActivityLifecycles
 import lt.vgrabauskas.worldstatistics.R
 import lt.vgrabauskas.worldstatistics.repository.Country
 
-class CountryDetails: ActivityLifecycles() {
+class CountryDetails : ActivityLifecycles() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

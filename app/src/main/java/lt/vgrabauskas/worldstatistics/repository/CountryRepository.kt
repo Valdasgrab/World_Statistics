@@ -7,6 +7,7 @@ class CountryRepository {
     fun addDummyListOfCountries() {
         countries.addAll(generateListOfCountries())
     }
+
     private fun generateListOfCountries(): List<Country> {
         val list = mutableListOf<Country>()
 
