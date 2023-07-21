@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp">
+
+        <LinearLayout
+            android:id="@+id/comparisonLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/backToMainButton"
+            android:orientation="horizontal">
+
+            <!-- Left Column for Initial Country -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- Initial Country Information Views -->
+                <TextView
+                    android:id="@+id/initialCountryNameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/initialCountryDetailsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <!-- Right Column for Second Selected Country -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!-- Second Selected Country Information Views -->
+                <TextView
+                    android:id="@+id/secondCountryNameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/secondCountryDetailsTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Button to Return to Main Activity -->
+        <Button
+            android:id="@+id/backToMainButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Back to Main Activity" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

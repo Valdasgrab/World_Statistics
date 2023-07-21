@@ -26,6 +26,10 @@
         <activity
             android:name=".secondactivity.CountryDetails"
             android:label="Second Activity" />
+        <activity
+            android:name=".secondactivity.SelectCountryActivity"
+            android:label="Second Activity" />
+
     </application>
 
 </manifest>

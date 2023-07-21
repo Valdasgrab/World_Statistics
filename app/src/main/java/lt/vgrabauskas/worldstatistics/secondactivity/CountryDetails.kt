@@ -1,6 +1,8 @@
 package lt.vgrabauskas.worldstatistics.secondactivity
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import lt.vgrabauskas.worldstatistics.ActivityLifecycles
 import lt.vgrabauskas.worldstatistics.R
@@ -14,12 +16,24 @@ class CountryDetails : ActivityLifecycles() {
 
         val selectedCountry = intent.getParcelableExtra<Country>("country")
 
-        val countryNameTextView: TextView = findViewById(R.id.countryNameTextView)
-        val countryDetailsTextView: TextView = findViewById(R.id.countryDetailsTextView)
-
         selectedCountry?.let {
-            countryNameTextView.text = it.name
-            countryDetailsTextView.text = it.details
+            findViewById<TextView>(R.id.countryNameTextView).text = it.name
+            findViewById<TextView>(R.id.countryDetailsTextView).text = it.details
         }
+
+        findViewById<Button>(R.id.backButton).setOnClickListener {
+            finish()
+        }
+
+        findViewById<Button>(R.id.compareButton).setOnClickListener {
+            val intent = Intent(this, SelectCountryActivity::class.java)
+            intent.putExtra("selectedCountry", selectedCountry)
+            startActivityForResult(intent, REQUEST_COMPARE)
+        }
+    }
+
+
+    companion object {
+        const val REQUEST_COMPARE = 1
     }
 }

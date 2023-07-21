@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
             if (selectedCountry != null) {
                 val intent = Intent(this, CountryDetails::class.java)
                 intent.putExtra("country", selectedCountry)
+                intent.putParcelableArrayListExtra("allCountries", ArrayList(countryViewModel.countryLiveData.value))
+
                 startActivity(intent)
             }
 
