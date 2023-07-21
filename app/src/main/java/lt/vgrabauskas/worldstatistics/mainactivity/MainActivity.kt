@@ -1,5 +1,6 @@
 package lt.vgrabauskas.worldstatistics.mainactivity
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -7,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import lt.vgrabauskas.worldstatistics.R
+import lt.vgrabauskas.worldstatistics.secondactivity.CountryDetails
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,5 +31,15 @@ class MainActivity : AppCompatActivity() {
                 adapter.addAll(countries.map { country -> country.name })
             }
         })
+
+        countriesListView.setOnItemClickListener { adapterView, view, position, listener ->
+            val selectedCountry = countryViewModel.countryLiveData.value?.get(position)
+            if (selectedCountry != null) {
+                val intent = Intent(this, CountryDetails::class.java)
+                intent.putExtra("country", selectedCountry)
+                startActivity(intent)
+            }
+
+        }
     }
 }

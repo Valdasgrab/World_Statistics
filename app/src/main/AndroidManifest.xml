@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SecondActivity"
+            android:name=".secondactivity.CountryDetails"
             android:label="Second Activity" />
     </application>
 
