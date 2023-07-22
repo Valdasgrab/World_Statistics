@@ -5,11 +5,14 @@ class CountryRepository {
     var countries = mutableListOf<Country>()
 
     fun addDummyListOfCountries() {
+        countries.clear()
         countries.addAll(generateListOfCountries())
+
     }
 
     private fun generateListOfCountries(): List<Country> {
         val list = mutableListOf<Country>()
+
 
         val lithuania = Country(
             id = 1,
