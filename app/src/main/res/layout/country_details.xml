@@ -3,11 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/countryNameTextView"
@@ -19,7 +18,16 @@
         <TextView
             android:id="@+id/countryDetailsTextView"
             android:layout_width="match_parent"
-            android:layout_height="520dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/countryNameTextView"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/countryPopulationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/countryDetailsTextView"
             android:layout_marginTop="16dp"
             android:textSize="18sp" />
 
@@ -27,15 +35,16 @@
             android:id="@+id/backButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_alignParentBottom="true"
             android:text="Back" />
 
         <Button
             android:id="@+id/compareButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_above="@id/backButton"
             android:text="Compare" />
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

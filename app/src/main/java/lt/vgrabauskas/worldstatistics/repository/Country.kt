@@ -7,11 +7,14 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Country(
     @SerializedName("name") val countryName: CountryName?,
-    @SerializedName("capital") val capital: List<String>?, // Change to List<String>
+    @SerializedName("capital") val capital: List<String>?,
     @SerializedName("population") val population: Long
 ) : Parcelable {
     val commonName: String
         get() = countryName?.common ?: ""
+
+    val formattedCapital: String
+        get() = capital?.joinToString(", ") ?: ""
 
     override fun toString(): String {
         return commonName

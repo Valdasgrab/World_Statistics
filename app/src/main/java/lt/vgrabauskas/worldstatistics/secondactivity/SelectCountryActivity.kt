@@ -74,15 +74,19 @@ class SelectCountryActivity : AppCompatActivity() {
         setContentView(R.layout.country_comparison)
         val initialCountryNameTextView: TextView = findViewById(R.id.initialCountryNameTextView)
         val initialCountryDetailsTextView: TextView = findViewById(R.id.initialCountryDetailsTextView)
+        val initialCountryPopulationTextView: TextView = findViewById(R.id.initialCountryPopulationTextView)
 
         initialCountryNameTextView.text = initialCountry.commonName
-        initialCountryDetailsTextView.text = initialCountry.capital.toString()
+        initialCountryDetailsTextView.text = initialCountry.formattedCapital
+        initialCountryPopulationTextView.text = initialCountry.population.toString()
 
         val secondCountryNameTextView: TextView = findViewById(R.id.secondCountryNameTextView)
         val secondCountryDetailsTextView: TextView = findViewById(R.id.secondCountryDetailsTextView)
+        val secondCountryPopulationTextView: TextView = findViewById(R.id.secondCountryPopulationTextView)
 
         secondCountryNameTextView.text = selectedCountry.commonName
-        secondCountryDetailsTextView.text = selectedCountry.capital.toString()
+        secondCountryDetailsTextView.text = selectedCountry.formattedCapital
+        secondCountryPopulationTextView.text = selectedCountry.population.toString()
 
         findViewById<Button>(R.id.backToMainButton).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

@@ -16,9 +16,13 @@ class CountryDetails : ActivityLifecycles() {
 
         val selectedCountry = intent.getParcelableExtra<Country>("country")
 
+
+
         selectedCountry?.let {
             findViewById<TextView>(R.id.countryNameTextView).text = it.commonName
-            findViewById<TextView>(R.id.countryDetailsTextView).text = it.capital.toString()
+            findViewById<TextView>(R.id.countryDetailsTextView).text = "Capital: " + selectedCountry?.formattedCapital
+            findViewById<TextView>(R.id.countryPopulationTextView).text =
+                "Population: " + it.population
         }
 
         findViewById<Button>(R.id.backButton).setOnClickListener {
