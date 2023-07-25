@@ -1,40 +1,20 @@
 package lt.vgrabauskas.worldstatistics.repository
 
+import lt.vgrabauskas.worldstatistics.CountryApiService
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
 class CountryRepository {
 
-    var countries = mutableListOf<Country>()
+    private val retrofit = Retrofit.Builder()
+        .baseUrl("https://restcountries.com/")
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
-    fun addDummyListOfCountries() {
-        countries.clear()
-        countries.addAll(generateListOfCountries())
+    private val apiService = retrofit.create(CountryApiService::class.java)
 
-    }
-
-    private fun generateListOfCountries(): List<Country> {
-        val list = mutableListOf<Country>()
-
-
-        val lithuania = Country(
-            id = 1,
-            name = "Lithuania",
-            details = "Lithuania is a country in the Baltic region of Europe."
-        )
-
-        val latvia = Country(
-            id = 2,
-            name = "Latvia",
-            details = "Latvia is a country in the Baltic region of Northern Europe."
-        )
-
-        val estonia = Country(
-            id = 3,
-            name = "Estonia",
-            details = "Estonia is a country on the eastern coast of the Baltic Sea."
-        )
-        list.add(lithuania)
-        list.add(latvia)
-        list.add(estonia)
-        return list
+    suspend fun fetchCountries(): List<Country> {
+        return apiService.getCountries()
     }
 
     companion object {

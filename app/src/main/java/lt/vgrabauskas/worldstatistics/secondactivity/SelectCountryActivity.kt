@@ -48,7 +48,7 @@ class SelectCountryActivity : AppCompatActivity() {
             countriesForComparisonFiltered =
                 countries?.filter { it != initialCountry } ?: emptyList()
             adapter.clear()
-            adapter.addAll(countriesForComparisonFiltered.map { country -> country.name })
+            adapter.addAll(countriesForComparisonFiltered.map { country -> country.commonName })
             countriesListView.setOnItemClickListener { _, _, position, _ ->
                 val secondSelectedCountry = countriesForComparisonFiltered.getOrNull(position)
                 if (secondSelectedCountry != null) {
@@ -58,7 +58,6 @@ class SelectCountryActivity : AppCompatActivity() {
                 }
             }
             if (!isCountrySelected) {
-                // If no country is selected yet, display the initial country details by default
                 updateCountryViews()
             }
         }
@@ -73,20 +72,17 @@ class SelectCountryActivity : AppCompatActivity() {
             return
         }
         setContentView(R.layout.country_comparison)
-        // Update the initial country views
         val initialCountryNameTextView: TextView = findViewById(R.id.initialCountryNameTextView)
         val initialCountryDetailsTextView: TextView = findViewById(R.id.initialCountryDetailsTextView)
 
-        initialCountryNameTextView.text = initialCountry.name
-        initialCountryDetailsTextView.text = initialCountry.details
+        initialCountryNameTextView.text = initialCountry.commonName
+        initialCountryDetailsTextView.text = initialCountry.capital.toString()
 
-        // Update the second selected country views
         val secondCountryNameTextView: TextView = findViewById(R.id.secondCountryNameTextView)
         val secondCountryDetailsTextView: TextView = findViewById(R.id.secondCountryDetailsTextView)
 
-        secondCountryNameTextView.text = selectedCountry.name
-        secondCountryDetailsTextView.text = selectedCountry.details
-
+        secondCountryNameTextView.text = selectedCountry.commonName
+        secondCountryDetailsTextView.text = selectedCountry.capital.toString()
 
         findViewById<Button>(R.id.backToMainButton).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

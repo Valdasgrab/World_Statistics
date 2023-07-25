@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         countryViewModel.countryLiveData.observe(this, Observer { countries ->
             countries?.let {
                 adapter.clear()
-                adapter.addAll(countries.map { country -> country.name })
+                adapter.addAll(countries.map { country -> country.commonName })
             }
         })
 
@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
                 startActivity(intent)
             }
-
         }
     }
 }

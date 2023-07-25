@@ -3,6 +3,8 @@ package lt.vgrabauskas.worldstatistics.mainactivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import lt.vgrabauskas.worldstatistics.repository.Country
 import lt.vgrabauskas.worldstatistics.repository.CountryRepository
 
@@ -14,10 +16,10 @@ class CountryViewModel : ViewModel() {
         get() = _countryLiveData
 
     fun fetchCountries() {
-        if (countryLiveData.value == null || _countryLiveData.value?.isEmpty() == true) {
-            CountryRepository.instance.addDummyListOfCountries()
+        viewModelScope.launch {
+            val countries = countryRepository.fetchCountries()
+            val sortedCountries = countries.sortedBy { it.commonName }
+            _countryLiveData.value = sortedCountries
         }
-        _countryLiveData.value = countryRepository.countries
     }
-
 }
