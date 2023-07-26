@@ -12,7 +12,6 @@
             android:id="@+id/comparisonLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/backToMainButton"
             android:orientation="horizontal">
 
             <!-- Left Column for Initial Country -->
@@ -20,13 +19,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="3">
 
                 <!-- Initial Country Information Views -->
                 <TextView
                     android:id="@+id/initialCountryNameTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -34,14 +35,16 @@
                 <TextView
                     android:id="@+id/initialCountryDetailsTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/initialCountryPopulationTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -51,13 +54,15 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:weightSum="3">
 
                 <!-- Second Selected Country Information Views -->
                 <TextView
                     android:id="@+id/secondCountryNameTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -65,14 +70,16 @@
                 <TextView
                     android:id="@+id/secondCountryDetailsTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/secondCountryPopulationTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:padding="8dp"
                     android:textSize="18sp" />
             </LinearLayout>

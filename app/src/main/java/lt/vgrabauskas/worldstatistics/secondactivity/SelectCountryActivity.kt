@@ -98,8 +98,9 @@ class SelectCountryActivity : AppCompatActivity() {
             findViewById(R.id.initialCountryPopulationTextView)
 
         initialCountryNameTextView.text = initialCountry.commonName
-        initialCountryDetailsTextView.text = initialCountry.formattedCapital
-        initialCountryPopulationTextView.text = initialCountry.population.toString()
+        initialCountryDetailsTextView.text = "Capital City: \n" + initialCountry.formattedCapital
+        initialCountryPopulationTextView.text =
+            "Population: \n" + initialCountry.population.toString()
 
         val secondCountryNameTextView: TextView = findViewById(R.id.secondCountryNameTextView)
         val secondCountryDetailsTextView: TextView = findViewById(R.id.secondCountryDetailsTextView)
@@ -107,8 +108,9 @@ class SelectCountryActivity : AppCompatActivity() {
             findViewById(R.id.secondCountryPopulationTextView)
 
         secondCountryNameTextView.text = selectedCountry.commonName
-        secondCountryDetailsTextView.text = selectedCountry.formattedCapital
-        secondCountryPopulationTextView.text = selectedCountry.population.toString()
+        secondCountryDetailsTextView.text = "Capital City: \n" + selectedCountry.formattedCapital
+        secondCountryPopulationTextView.text =
+            "Population: \n" + selectedCountry.population.toString()
 
         findViewById<Button>(R.id.backToMainButton).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

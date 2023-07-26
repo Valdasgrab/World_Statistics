@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("country", selectedCountry)
                 intent.putParcelableArrayListExtra(
                     "allCountries",
-                    ArrayList(countryViewModel.countryLiveData.value)
+                    countryViewModel.countryLiveData.value?.let { ArrayList(it) }
                 )
                 startActivity(intent)
             }
