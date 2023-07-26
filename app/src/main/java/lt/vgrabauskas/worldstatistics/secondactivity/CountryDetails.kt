@@ -20,7 +20,8 @@ class CountryDetails : AppCompatActivity() {
 
         selectedCountry?.let {
             findViewById<TextView>(R.id.countryNameTextView).text = it.commonName
-            findViewById<TextView>(R.id.countryDetailsTextView).text = "Capital: " + selectedCountry?.formattedCapital
+            findViewById<TextView>(R.id.countryDetailsTextView).text =
+                "Capital: " + selectedCountry?.formattedCapital
             findViewById<TextView>(R.id.countryPopulationTextView).text =
                 "Population: " + it.population
         }
@@ -35,7 +36,6 @@ class CountryDetails : AppCompatActivity() {
             startActivityForResult(intent, REQUEST_COMPARE)
         }
     }
-
 
     companion object {
         const val REQUEST_COMPARE = 1

@@ -7,7 +7,6 @@ import android.widget.ListView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import lt.vgrabauskas.worldstatistics.R
 import lt.vgrabauskas.worldstatistics.secondactivity.CountryDetails
@@ -31,7 +30,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                // Filter the countries based on the new query
                 filterCountries(newText)
                 return true
             }
@@ -48,22 +46,24 @@ class MainActivity : AppCompatActivity() {
 
         countriesListView.setOnItemClickListener { adapterView, view, position, listener ->
             val selectedCountryName = adapter.getItem(position)
-            val selectedCountry = countryViewModel.countryLiveData.value?.find { it.commonName == selectedCountryName }
+            val selectedCountry =
+                countryViewModel.countryLiveData.value?.find { it.commonName == selectedCountryName }
             if (selectedCountry != null) {
                 val intent = Intent(this, CountryDetails::class.java)
                 intent.putExtra("country", selectedCountry)
-                intent.putParcelableArrayListExtra("allCountries", ArrayList(countryViewModel.countryLiveData.value))
-
+                intent.putParcelableArrayListExtra(
+                    "allCountries",
+                    ArrayList(countryViewModel.countryLiveData.value)
+                )
                 startActivity(intent)
             }
         }
     }
+
     private fun filterCountries(query: String?) {
         val filteredCountries = countryViewModel.countryLiveData.value?.filter { country ->
             country.commonName.contains(query ?: "", ignoreCase = true)
         } ?: emptyList()
-
-        // Update the adapter with the filtered countries
         adapter.clear()
         adapter.addAll(filteredCountries.map { country -> country.commonName })
     }
