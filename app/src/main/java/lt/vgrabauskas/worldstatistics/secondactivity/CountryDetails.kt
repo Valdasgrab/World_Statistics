@@ -4,11 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import lt.vgrabauskas.worldstatistics.ActivityLifecycles
+import androidx.appcompat.app.AppCompatActivity
 import lt.vgrabauskas.worldstatistics.R
 import lt.vgrabauskas.worldstatistics.repository.Country
 
-class CountryDetails : ActivityLifecycles() {
+class CountryDetails : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,7 +20,8 @@ class CountryDetails : ActivityLifecycles() {
 
         selectedCountry?.let {
             findViewById<TextView>(R.id.countryNameTextView).text = it.commonName
-            findViewById<TextView>(R.id.countryDetailsTextView).text = "Capital: " + selectedCountry?.formattedCapital
+            findViewById<TextView>(R.id.countryDetailsTextView).text =
+                "Capital: " + selectedCountry?.formattedCapital
             findViewById<TextView>(R.id.countryPopulationTextView).text =
                 "Population: " + it.population
         }
@@ -35,7 +36,6 @@ class CountryDetails : ActivityLifecycles() {
             startActivityForResult(intent, REQUEST_COMPARE)
         }
     }
-
 
     companion object {
         const val REQUEST_COMPARE = 1
