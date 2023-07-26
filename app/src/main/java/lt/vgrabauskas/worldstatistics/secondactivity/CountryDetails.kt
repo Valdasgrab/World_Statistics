@@ -4,11 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import lt.vgrabauskas.worldstatistics.ActivityLifecycles
+import androidx.appcompat.app.AppCompatActivity
 import lt.vgrabauskas.worldstatistics.R
 import lt.vgrabauskas.worldstatistics.repository.Country
 
-class CountryDetails : ActivityLifecycles() {
+class CountryDetails : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
