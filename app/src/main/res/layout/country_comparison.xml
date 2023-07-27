@@ -3,97 +3,140 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:fillViewport="true">
 
-        <LinearLayout
-            android:id="@+id/comparisonLayout"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <!-- Left Column for Initial Country -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="3">
-
-                <!-- Initial Country Information Views -->
-                <TextView
-                    android:id="@+id/initialCountryNameTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/initialCountryDetailsTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/initialCountryPopulationTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
-            <!-- Right Column for Second Selected Country -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:weightSum="3">
-
-                <!-- Second Selected Country Information Views -->
-                <TextView
-                    android:id="@+id/secondCountryNameTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/secondCountryDetailsTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/secondCountryPopulationTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:padding="8dp"
-                    android:textSize="18sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <!-- Button to Return to Main Activity -->
-        <Button
-            android:id="@+id/backToMainButton"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:text="Back to Main Activity" />
-    </RelativeLayout>
+            android:layout_margin="16dp">
+
+            <LinearLayout
+                android:id="@+id/comparisonLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Left Column for Initial Country -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <!-- Initial Country Information Views -->
+                    <TextView
+                        android:id="@+id/initialCountryNameTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:padding="8dp"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/initialCountryDetailsTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/initialCountryPopulationTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/initialCountryAreaTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/initialCountryCurrencyTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/initialCountryLanguageTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <!-- Right Column for Second Selected Country -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:weightSum="3">
+
+                    <!-- Second Selected Country Information Views -->
+                    <TextView
+                        android:id="@+id/secondCountryNameTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="120dp"
+                        android:padding="8dp"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/secondCountryDetailsTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/secondCountryPopulationTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/secondCountryAreaTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/secondCountryCurrencyTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/secondCountryLanguageTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Button to Return to Main Activity -->
+            <Button
+                android:id="@+id/backToMainButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
+                android:text="Back to Main Activity" />
+        </RelativeLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

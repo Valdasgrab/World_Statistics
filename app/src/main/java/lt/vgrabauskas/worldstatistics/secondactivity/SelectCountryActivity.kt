@@ -41,6 +41,10 @@ class SelectCountryActivity : AppCompatActivity() {
 
         searchView = findViewById(R.id.searchView)
         searchView.queryHint = "Search countries"
+        searchView.setOnClickListener {
+            searchView.isIconified = false
+            searchView.requestFocus()
+        }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -96,21 +100,39 @@ class SelectCountryActivity : AppCompatActivity() {
             findViewById(R.id.initialCountryDetailsTextView)
         val initialCountryPopulationTextView: TextView =
             findViewById(R.id.initialCountryPopulationTextView)
+        val initialCountryAreaTextView: TextView =
+            findViewById(R.id.initialCountryAreaTextView)
+        val initialCountryCurrencyTextView: TextView =
+            findViewById(R.id.initialCountryCurrencyTextView)
+        val initialCountryLanguageTextView: TextView =
+            findViewById(R.id.initialCountryLanguageTextView)
 
         initialCountryNameTextView.text = initialCountry.commonName
         initialCountryDetailsTextView.text = "Capital City: \n" + initialCountry.formattedCapital
         initialCountryPopulationTextView.text =
             "Population: \n" + initialCountry.population.toString()
+        initialCountryAreaTextView.text = "Area: \n" + initialCountry.area
+        initialCountryCurrencyTextView.text = "Currency: \n" + initialCountry.currencies
+        initialCountryLanguageTextView.text = "Languages: \n" + initialCountry.languages
 
         val secondCountryNameTextView: TextView = findViewById(R.id.secondCountryNameTextView)
         val secondCountryDetailsTextView: TextView = findViewById(R.id.secondCountryDetailsTextView)
         val secondCountryPopulationTextView: TextView =
             findViewById(R.id.secondCountryPopulationTextView)
+        val secondCountryAreaTextView: TextView =
+            findViewById(R.id.secondCountryAreaTextView)
+        val secondCountryCurrencyTextView: TextView =
+            findViewById(R.id.secondCountryCurrencyTextView)
+        val secondCountryLanguageTextView: TextView =
+            findViewById(R.id.secondCountryLanguageTextView)
 
         secondCountryNameTextView.text = selectedCountry.commonName
         secondCountryDetailsTextView.text = "Capital City: \n" + selectedCountry.formattedCapital
         secondCountryPopulationTextView.text =
             "Population: \n" + selectedCountry.population.toString()
+        secondCountryAreaTextView.text = "Area: \n" + selectedCountry.area
+        secondCountryCurrencyTextView.text = "Currency: \n" + selectedCountry.currencies
+        secondCountryLanguageTextView.text = "Languages: \n" + selectedCountry.languages
 
         findViewById<Button>(R.id.backToMainButton).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

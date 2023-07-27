@@ -9,11 +9,20 @@
         android:layout_margin="16dp"
         android:orientation="vertical">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="Search countries..." />
+            android:layout_margin="8dp">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:iconifiedByDefault="false"
+                android:searchIcon="@null"
+                android:queryHint="Search countries..." />
+
+        </FrameLayout>
 
         <ListView
             android:id="@+id/countriesListView"

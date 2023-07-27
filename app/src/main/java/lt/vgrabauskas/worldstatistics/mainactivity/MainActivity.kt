@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         countriesListView.adapter = adapter
 
         val searchView: SearchView = findViewById(R.id.searchView)
+        searchView.setOnClickListener {
+            searchView.isIconified = false
+            searchView.requestFocus()
+        }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
