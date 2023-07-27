@@ -68,6 +68,48 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:textSize="18sp" />
+
+                    <LinearLayout
+                        android:id="@+id/initialFlagLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Flag" />
+
+                        <ImageView
+                            android:id="@+id/initialFlagImageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:padding="5dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/initialCoatOfArmsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/flagLayout"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Coat of Arms" />
+
+                        <ImageView
+                            android:id="@+id/initialCoatOfArmsImageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/flagLayout"
+                            android:layout_marginTop="16dp"/>
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -119,6 +161,47 @@
                         android:layout_height="wrap_content"
                         android:padding="8dp"
                         android:textSize="18sp" />
+                    <LinearLayout
+                        android:id="@+id/secondFlagLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Flag" />
+
+                        <ImageView
+                            android:id="@+id/secondFlagImageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:padding="5dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/secondCoatOfArmsLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/flagLayout"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Coat of Arms" />
+
+                        <ImageView
+                            android:id="@+id/secondCoatOfArmsImageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="50dp"
+                            android:layout_below="@id/flagLayout"
+                            android:layout_marginTop="16dp" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 

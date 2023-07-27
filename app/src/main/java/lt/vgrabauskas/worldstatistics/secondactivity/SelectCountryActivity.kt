@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import lt.vgrabauskas.worldstatistics.R
 import lt.vgrabauskas.worldstatistics.mainactivity.CountryViewModel
 import lt.vgrabauskas.worldstatistics.mainactivity.MainActivity
@@ -115,6 +117,11 @@ class SelectCountryActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.initialCountryCurrencyTextView).text =
                 "Currency: \n$currencyName \n($currencySymbol)"
         }
+        flagsAndCoatOfArms(
+            initialCountry,
+            findViewById(R.id.initialFlagImageView),
+            findViewById(R.id.initialCoatOfArmsImageView)
+        )
 
         initialCountryNameTextView.text = initialCountry.commonName
         initialCountryDetailsTextView.text = "Capital City: \n" + initialCountry.formattedCapital
@@ -142,6 +149,11 @@ class SelectCountryActivity : AppCompatActivity() {
             findViewById<TextView>(R.id.secondCountryCurrencyTextView).text =
                 "Currency: \n$currencyName \n($currencySymbol)"
         }
+        flagsAndCoatOfArms(
+            selectedCountry,
+            findViewById(R.id.secondFlagImageView),
+            findViewById(R.id.secondCoatOfArmsImageView)
+        )
 
         secondCountryNameTextView.text = selectedCountry.commonName
         secondCountryDetailsTextView.text = "Capital City: \n" + selectedCountry.formattedCapital
@@ -157,8 +169,28 @@ class SelectCountryActivity : AppCompatActivity() {
         }
     }
 
+    private fun flagsAndCoatOfArms(
+        country: Country,
+        flagImageView: ImageView,
+        coatOfArmsImageView: ImageView
+    ) {
+        val flagUrl = country.flags?.png
+        if (flagUrl != null) {
+            Glide.with(this)
+                .load(flagUrl)
+                .into(flagImageView)
+        }
+        val coatOfArmsUrl = country.coatOfArms?.png
+        if (coatOfArmsUrl != null) {
+            Glide.with(this)
+                .load(coatOfArmsUrl)
+                .into(coatOfArmsImageView)
+        }
+    }
+
     override fun onDestroy() {
         countryViewModel.countryLiveData.removeObservers(this)
         super.onDestroy()
     }
 }
+
