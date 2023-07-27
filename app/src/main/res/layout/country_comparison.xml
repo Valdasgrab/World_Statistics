@@ -19,7 +19,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <!-- Left Column for Initial Country -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -27,7 +26,6 @@
                     android:orientation="vertical"
                     android:weightSum="3">
 
-                    <!-- Initial Country Information Views -->
                     <TextView
                         android:id="@+id/initialCountryNameTextView"
                         android:layout_width="match_parent"
@@ -72,7 +70,6 @@
                         android:textSize="18sp" />
                 </LinearLayout>
 
-                <!-- Right Column for Second Selected Country -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -80,7 +77,6 @@
                     android:orientation="vertical"
                     android:weightSum="3">
 
-                    <!-- Second Selected Country Information Views -->
                     <TextView
                         android:id="@+id/secondCountryNameTextView"
                         android:layout_width="match_parent"
@@ -126,7 +122,6 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Button to Return to Main Activity -->
             <Button
                 android:id="@+id/backToMainButton"
                 android:layout_width="wrap_content"

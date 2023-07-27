@@ -102,18 +102,26 @@ class SelectCountryActivity : AppCompatActivity() {
             findViewById(R.id.initialCountryPopulationTextView)
         val initialCountryAreaTextView: TextView =
             findViewById(R.id.initialCountryAreaTextView)
-        val initialCountryCurrencyTextView: TextView =
-            findViewById(R.id.initialCountryCurrencyTextView)
         val initialCountryLanguageTextView: TextView =
             findViewById(R.id.initialCountryLanguageTextView)
+        val initialCountryLanguages = initialCountry.languages
+        val initialLanguagesString = initialCountryLanguages?.values?.joinToString(", ")
+        val initialCountryCurrencies = initialCountry.currencies
+        if (!initialCountryCurrencies.isNullOrEmpty()) {
+            val firstCurrencyCode = initialCountryCurrencies.keys.first()
+            val firstCurrency = initialCountryCurrencies[firstCurrencyCode]
+            val currencyName = firstCurrency?.name
+            val currencySymbol = firstCurrency?.symbol
+            findViewById<TextView>(R.id.initialCountryCurrencyTextView).text =
+                "Currency: \n$currencyName \n($currencySymbol)"
+        }
 
         initialCountryNameTextView.text = initialCountry.commonName
         initialCountryDetailsTextView.text = "Capital City: \n" + initialCountry.formattedCapital
         initialCountryPopulationTextView.text =
             "Population: \n" + initialCountry.population.toString()
         initialCountryAreaTextView.text = "Area: \n" + initialCountry.area
-        initialCountryCurrencyTextView.text = "Currency: \n" + initialCountry.currencies
-        initialCountryLanguageTextView.text = "Languages: \n" + initialCountry.languages
+        initialCountryLanguageTextView.text = "Languages: \n" + initialLanguagesString
 
         val secondCountryNameTextView: TextView = findViewById(R.id.secondCountryNameTextView)
         val secondCountryDetailsTextView: TextView = findViewById(R.id.secondCountryDetailsTextView)
@@ -121,18 +129,26 @@ class SelectCountryActivity : AppCompatActivity() {
             findViewById(R.id.secondCountryPopulationTextView)
         val secondCountryAreaTextView: TextView =
             findViewById(R.id.secondCountryAreaTextView)
-        val secondCountryCurrencyTextView: TextView =
-            findViewById(R.id.secondCountryCurrencyTextView)
         val secondCountryLanguageTextView: TextView =
             findViewById(R.id.secondCountryLanguageTextView)
+        val secondCountryLanguages = selectedCountry.languages
+        val secondLanguagesString = secondCountryLanguages?.values?.joinToString(", ")
+        val secondCountryCurrencies = selectedCountry.currencies
+        if (!secondCountryCurrencies.isNullOrEmpty()) {
+            val firstCurrencyCode = secondCountryCurrencies.keys.first()
+            val firstCurrency = secondCountryCurrencies[firstCurrencyCode]
+            val currencyName = firstCurrency?.name
+            val currencySymbol = firstCurrency?.symbol
+            findViewById<TextView>(R.id.secondCountryCurrencyTextView).text =
+                "Currency: \n$currencyName \n($currencySymbol)"
+        }
 
         secondCountryNameTextView.text = selectedCountry.commonName
         secondCountryDetailsTextView.text = "Capital City: \n" + selectedCountry.formattedCapital
         secondCountryPopulationTextView.text =
             "Population: \n" + selectedCountry.population.toString()
         secondCountryAreaTextView.text = "Area: \n" + selectedCountry.area
-        secondCountryCurrencyTextView.text = "Currency: \n" + selectedCountry.currencies
-        secondCountryLanguageTextView.text = "Languages: \n" + selectedCountry.languages
+        secondCountryLanguageTextView.text = "Languages: \n" + secondLanguagesString
 
         findViewById<Button>(R.id.backToMainButton).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
