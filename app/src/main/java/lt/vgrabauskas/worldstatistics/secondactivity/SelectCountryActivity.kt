@@ -96,71 +96,10 @@ class SelectCountryActivity : AppCompatActivity() {
         if (!this::selectedCountry.isInitialized) {
             return
         }
+
         setContentView(R.layout.country_comparison)
-        val initialCountryNameTextView: TextView = findViewById(R.id.initialCountryNameTextView)
-        val initialCountryDetailsTextView: TextView =
-            findViewById(R.id.initialCountryDetailsTextView)
-        val initialCountryPopulationTextView: TextView =
-            findViewById(R.id.initialCountryPopulationTextView)
-        val initialCountryAreaTextView: TextView =
-            findViewById(R.id.initialCountryAreaTextView)
-        val initialCountryLanguageTextView: TextView =
-            findViewById(R.id.initialCountryLanguageTextView)
-        val initialCountryLanguages = initialCountry.languages
-        val initialLanguagesString = initialCountryLanguages?.values?.joinToString(", ")
-        val initialCountryCurrencies = initialCountry.currencies
-        if (!initialCountryCurrencies.isNullOrEmpty()) {
-            val firstCurrencyCode = initialCountryCurrencies.keys.first()
-            val firstCurrency = initialCountryCurrencies[firstCurrencyCode]
-            val currencyName = firstCurrency?.name
-            val currencySymbol = firstCurrency?.symbol
-            findViewById<TextView>(R.id.initialCountryCurrencyTextView).text =
-                "Currency: \n$currencyName \n($currencySymbol)"
-        }
-        flagsAndCoatOfArms(
-            initialCountry,
-            findViewById(R.id.initialFlagImageView),
-            findViewById(R.id.initialCoatOfArmsImageView)
-        )
-
-        initialCountryNameTextView.text = initialCountry.commonName
-        initialCountryDetailsTextView.text = "Capital City: \n" + initialCountry.formattedCapital
-        initialCountryPopulationTextView.text =
-            "Population: \n" + initialCountry.population.toString()
-        initialCountryAreaTextView.text = "Area: \n" + initialCountry.area
-        initialCountryLanguageTextView.text = "Languages: \n" + initialLanguagesString
-
-        val secondCountryNameTextView: TextView = findViewById(R.id.secondCountryNameTextView)
-        val secondCountryDetailsTextView: TextView = findViewById(R.id.secondCountryDetailsTextView)
-        val secondCountryPopulationTextView: TextView =
-            findViewById(R.id.secondCountryPopulationTextView)
-        val secondCountryAreaTextView: TextView =
-            findViewById(R.id.secondCountryAreaTextView)
-        val secondCountryLanguageTextView: TextView =
-            findViewById(R.id.secondCountryLanguageTextView)
-        val secondCountryLanguages = selectedCountry.languages
-        val secondLanguagesString = secondCountryLanguages?.values?.joinToString(", ")
-        val secondCountryCurrencies = selectedCountry.currencies
-        if (!secondCountryCurrencies.isNullOrEmpty()) {
-            val firstCurrencyCode = secondCountryCurrencies.keys.first()
-            val firstCurrency = secondCountryCurrencies[firstCurrencyCode]
-            val currencyName = firstCurrency?.name
-            val currencySymbol = firstCurrency?.symbol
-            findViewById<TextView>(R.id.secondCountryCurrencyTextView).text =
-                "Currency: \n$currencyName \n($currencySymbol)"
-        }
-        flagsAndCoatOfArms(
-            selectedCountry,
-            findViewById(R.id.secondFlagImageView),
-            findViewById(R.id.secondCoatOfArmsImageView)
-        )
-
-        secondCountryNameTextView.text = selectedCountry.commonName
-        secondCountryDetailsTextView.text = "Capital City: \n" + selectedCountry.formattedCapital
-        secondCountryPopulationTextView.text =
-            "Population: \n" + selectedCountry.population.toString()
-        secondCountryAreaTextView.text = "Area: \n" + selectedCountry.area
-        secondCountryLanguageTextView.text = "Languages: \n" + secondLanguagesString
+        setInitialCountryViews(initialCountry)
+        setSecondCountryViews(selectedCountry)
 
         findViewById<Button>(R.id.backToMainButton).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
@@ -169,6 +108,50 @@ class SelectCountryActivity : AppCompatActivity() {
         }
     }
 
+    private fun setInitialCountryViews(country: Country) {
+        val initialCountryNameTextView: TextView = findViewById(R.id.initialCountryNameTextView)
+        val initialCountryDetailsTextView: TextView = findViewById(R.id.initialCountryDetailsTextView)
+        val initialCountryPopulationTextView: TextView = findViewById(R.id.initialCountryPopulationTextView)
+        val initialCountryAreaTextView: TextView = findViewById(R.id.initialCountryAreaTextView)
+        val initialCountryLanguageTextView: TextView = findViewById(R.id.initialCountryLanguageTextView)
+
+        initialCountryNameTextView.text = country.commonName
+        initialCountryDetailsTextView.text = "Capital City: \n" + country.formattedCapital
+        initialCountryPopulationTextView.text = "Population: \n" + country.population.toString()
+        initialCountryAreaTextView.text = "Area: \n" + country.area
+        initialCountryLanguageTextView.text = "Languages: \n" + getLanguagesString(country.languages)
+        setCurrencyTextView(R.id.initialCountryCurrencyTextView, country.currencies)
+        flagsAndCoatOfArms(country, findViewById(R.id.initialFlagImageView), findViewById(R.id.initialCoatOfArmsImageView))
+    }
+    private fun setSecondCountryViews(country: Country) {
+        val secondCountryNameTextView: TextView = findViewById(R.id.secondCountryNameTextView)
+        val secondCountryDetailsTextView: TextView = findViewById(R.id.secondCountryDetailsTextView)
+        val secondCountryPopulationTextView: TextView = findViewById(R.id.secondCountryPopulationTextView)
+        val secondCountryAreaTextView: TextView = findViewById(R.id.secondCountryAreaTextView)
+        val secondCountryLanguageTextView: TextView = findViewById(R.id.secondCountryLanguageTextView)
+
+        secondCountryNameTextView.text = country.commonName
+        secondCountryDetailsTextView.text = "Capital City: \n" + country.formattedCapital
+        secondCountryPopulationTextView.text = "Population: \n" + country.population.toString()
+        secondCountryAreaTextView.text = "Area: \n" + country.area
+        secondCountryLanguageTextView.text = "Languages: \n" + getLanguagesString(country.languages)
+        setCurrencyTextView(R.id.secondCountryCurrencyTextView, country.currencies)
+        flagsAndCoatOfArms(country, findViewById(R.id.secondFlagImageView), findViewById(R.id.secondCoatOfArmsImageView))
+    }
+
+    private fun getLanguagesString(languages: Map<String, String>?): String {
+        return languages?.values?.joinToString(", ") ?: ""
+    }
+
+    private fun setCurrencyTextView(textViewId: Int, currencies: Map<String, Country.Currency>?) {
+        if (!currencies.isNullOrEmpty()) {
+            val firstCurrencyCode = currencies.keys.first()
+            val firstCurrency = currencies[firstCurrencyCode]
+            val currencyName = firstCurrency?.name
+            val currencySymbol = firstCurrency?.symbol
+            findViewById<TextView>(textViewId).text = "Currency: \n$currencyName \n($currencySymbol)"
+        }
+    }
     private fun flagsAndCoatOfArms(
         country: Country,
         flagImageView: ImageView,

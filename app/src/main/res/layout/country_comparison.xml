@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:fillViewport="true">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp">
+            android:layout_margin="16dp"
+            android:layout_marginBottom="25dp">
 
             <LinearLayout
                 android:id="@+id/comparisonLayout"
@@ -29,7 +33,7 @@
                     <TextView
                         android:id="@+id/initialCountryNameTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="140dp"
                         android:padding="8dp"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -58,7 +62,7 @@
                     <TextView
                         android:id="@+id/initialCountryCurrencyTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="140dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
 
@@ -85,7 +89,7 @@
                         <ImageView
                             android:id="@+id/initialFlagImageView"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="190dp"
                             android:padding="5dp" />
                     </LinearLayout>
 
@@ -95,6 +99,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/flagLayout"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="25dp"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -106,9 +111,10 @@
                         <ImageView
                             android:id="@+id/initialCoatOfArmsImageView"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="190dp"
                             android:layout_below="@id/flagLayout"
-                            android:layout_marginTop="16dp"/>
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="50dp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -122,7 +128,7 @@
                     <TextView
                         android:id="@+id/secondCountryNameTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="120dp"
+                        android:layout_height="140dp"
                         android:padding="8dp"
                         android:textSize="24sp"
                         android:textStyle="bold" />
@@ -151,7 +157,7 @@
                     <TextView
                         android:id="@+id/secondCountryCurrencyTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="140dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
 
@@ -177,7 +183,7 @@
                         <ImageView
                             android:id="@+id/secondFlagImageView"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="190dp"
                             android:padding="5dp" />
                     </LinearLayout>
 
@@ -187,6 +193,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/flagLayout"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="25dp"
                         android:gravity="center"
                         android:orientation="vertical">
 
@@ -198,23 +205,22 @@
                         <ImageView
                             android:id="@+id/secondCoatOfArmsImageView"
                             android:layout_width="wrap_content"
-                            android:layout_height="50dp"
+                            android:layout_height="190dp"
                             android:layout_below="@id/flagLayout"
-                            android:layout_marginTop="16dp" />
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="50dp"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-
-            <Button
-                android:id="@+id/backToMainButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="16dp"
-                android:text="Back to Main Activity" />
         </RelativeLayout>
 
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/backToMainButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:text="Back to Main Activity" />
+</LinearLayout>
