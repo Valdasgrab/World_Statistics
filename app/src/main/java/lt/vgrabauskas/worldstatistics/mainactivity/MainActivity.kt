@@ -24,6 +24,10 @@ class MainActivity : AppCompatActivity() {
         countriesListView.adapter = adapter
 
         val searchView: SearchView = findViewById(R.id.searchView)
+        searchView.setOnClickListener {
+            searchView.isIconified = false
+            searchView.requestFocus()
+        }
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
@@ -53,7 +57,7 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("country", selectedCountry)
                 intent.putParcelableArrayListExtra(
                     "allCountries",
-                    ArrayList(countryViewModel.countryLiveData.value)
+                    countryViewModel.countryLiveData.value?.let { ArrayList(it) }
                 )
                 startActivity(intent)
             }
