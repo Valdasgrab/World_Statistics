@@ -3,32 +3,29 @@ package lt.vgrabauskas.worldstatistics.mainactivity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
-import lt.vgrabauskas.worldstatistics.R
-import lt.vgrabauskas.worldstatistics.secondactivity.CountryDetails
+import lt.vgrabauskas.worldstatistics.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val countryViewModel: CountryViewModel by viewModels()
+    private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, mutableListOf<String>())
-        val countriesListView: ListView = findViewById(R.id.countriesListView)
-        countriesListView.adapter = adapter
-
-        val searchView: SearchView = findViewById(R.id.searchView)
-        searchView.setOnClickListener {
-            searchView.isIconified = false
-            searchView.requestFocus()
+        binding.countriesListView.adapter = adapter
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
+            binding.searchView.requestFocus()
         }
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -41,14 +38,14 @@ class MainActivity : AppCompatActivity() {
 
         countryViewModel.fetchCountries()
 
-        countryViewModel.countryLiveData.observe(this, Observer { countries ->
+        countryViewModel.countryLiveData.observe(this) { countries ->
             countries?.let {
                 adapter.clear()
                 adapter.addAll(countries.map { country -> country.commonName })
             }
-        })
+        }
 
-        countriesListView.setOnItemClickListener { adapterView, view, position, listener ->
+        binding.countriesListView.setOnItemClickListener { adapterView, view, position, listener ->
             val selectedCountryName = adapter.getItem(position)
             val selectedCountry =
                 countryViewModel.countryLiveData.value?.find { it.commonName == selectedCountryName }
