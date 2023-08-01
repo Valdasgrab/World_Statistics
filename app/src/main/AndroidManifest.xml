@@ -29,6 +29,9 @@
         <activity
             android:name=".secondactivity.SelectCountryActivity"
             android:label="Second Activity" />
+        <activity
+            android:name=".secondactivity.SelectCountryDetails"
+            android:label="Second Activity" />
 
     </application>
 
