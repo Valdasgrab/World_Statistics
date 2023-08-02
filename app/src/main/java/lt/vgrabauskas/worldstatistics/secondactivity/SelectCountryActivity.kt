@@ -1,6 +1,5 @@
 package lt.vgrabauskas.worldstatistics.secondactivity
 
-
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -19,45 +18,27 @@ class SelectCountryActivity : AppCompatActivity() {
     private lateinit var selectedCountry: Country
     private lateinit var countryAdapter: CountryAdapter
     private val countryViewModel: SelectCountryViewModel by viewModels()
-
     private var isCountrySelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectCountryBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         initialCountry = intent.getParcelableExtra("selectedCountry")!!
-
+        setupViews()
         setupRecyclerView()
-
-        val searchView: SearchView = binding.searchView
-        searchView.queryHint = "Search countries"
-        searchView.setOnClickListener {
-            searchView.isIconified = false
-            searchView.requestFocus()
-        }
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                filterCountries(newText)
-                return true
-            }
-        })
-
-        val observer = Observer<List<Country>> { countries ->
-            val countriesForComparisonFiltered = countries.filter { it != initialCountry }
-            countryAdapter.updateData(countriesForComparisonFiltered)
-
-            if (!isCountrySelected && ::selectedCountry.isInitialized) {
-                startCountryDetailsActivity()
-            }
-        }
-        countryViewModel.countryLiveData.observe(this, observer)
+        setupSearchView()
+        countryViewModel.initializeFilter()
+        observeFilteredCountries()
         countryViewModel.fetchCountries()
+    }
+
+    private fun setupViews() {
+        binding.searchView.queryHint = "Search countries"
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
+            binding.searchView.requestFocus()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -66,18 +47,33 @@ class SelectCountryActivity : AppCompatActivity() {
             isCountrySelected = true
             startCountryDetailsActivity()
         }
-
         binding.countriesRecyclerViewComparison.adapter = countryAdapter
         binding.countriesRecyclerViewComparison.layoutManager = LinearLayoutManager(this)
     }
 
-    private fun filterCountries(query: String?) {
-        val filteredCountries = countryViewModel.countryLiveData.value?.filter { country ->
-            country.commonName.contains(query ?: "", ignoreCase = true)
-        } ?: emptyList()
+    private fun setupSearchView() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
-        val countriesForComparisonFiltered = filteredCountries.filter { it != initialCountry }
-        countryAdapter.updateData(countriesForComparisonFiltered)
+            override fun onQueryTextChange(newText: String?): Boolean {
+                countryViewModel.filterCountries(newText)
+                return true
+            }
+        })
+    }
+
+    private fun observeFilteredCountries() {
+        val observer = Observer<List<Country>> { countries ->
+            val countriesForComparisonFiltered = countries.filter { it != initialCountry }
+            countryAdapter.updateData(countriesForComparisonFiltered)
+
+            if (!isCountrySelected && ::selectedCountry.isInitialized) {
+                startCountryDetailsActivity()
+            }
+        }
+        countryViewModel.filteredCountryLiveData.observe(this, observer)
     }
 
     private fun startCountryDetailsActivity() {

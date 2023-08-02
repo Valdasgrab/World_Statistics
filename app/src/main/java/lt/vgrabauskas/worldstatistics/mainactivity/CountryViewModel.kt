@@ -11,15 +11,24 @@ import lt.vgrabauskas.worldstatistics.repository.CountryRepository
 class CountryViewModel : ViewModel() {
     private val countryRepository: CountryRepository = CountryRepository.instance
     private val _countryLiveData = MutableLiveData<List<Country>>(mutableListOf())
+    private val _filteredCountryLiveData = MutableLiveData<List<Country>>()
 
-    val countryLiveData: LiveData<List<Country>>
-        get() = _countryLiveData
+    val filteredCountryLiveData: LiveData<List<Country>>
+        get() = _filteredCountryLiveData
 
     fun fetchCountries() {
         viewModelScope.launch {
             val countries = countryRepository.fetchCountries()
             val sortedCountries = countries.sortedBy { it.commonName }
             _countryLiveData.value = sortedCountries
+            _filteredCountryLiveData.value = sortedCountries
         }
+    }
+
+    fun filterCountries(query: String?) {
+        val filteredCountries = _countryLiveData.value?.filter { country ->
+            country.commonName.contains(query ?: "", ignoreCase = true)
+        } ?: emptyList()
+        _filteredCountryLiveData.value = filteredCountries
     }
 }

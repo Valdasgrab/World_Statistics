@@ -17,47 +17,49 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
+        setupViews()
+        setupRecyclerView()
+        setupSearchView()
+        countryViewModel.fetchCountries()
+        observeFilteredCountries()
+    }
 
+    private fun setupViews() {
+        binding.searchView.setOnClickListener {
+            binding.searchView.isIconified = false
+            binding.searchView.requestFocus()
+        }
+    }
+
+    private fun setupRecyclerView() {
         countryAdapter = CountryAdapter { selectedCountry ->
             val intent = Intent(this, CountryDetails::class.java)
             intent.putExtra("country", selectedCountry)
             startActivity(intent)
         }
-
         binding.countriesRecyclerView.adapter = countryAdapter
         binding.countriesRecyclerView.layoutManager = LinearLayoutManager(this)
+    }
 
-        binding.searchView.setOnClickListener {
-            binding.searchView.isIconified = false
-            binding.searchView.requestFocus()
-        }
-
+    private fun setupSearchView() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                filterCountries(newText)
+                countryViewModel.filterCountries(newText)
                 return true
             }
         })
+    }
 
-        countryViewModel.fetchCountries()
-
-        countryViewModel.countryLiveData.observe(this) { countries ->
-            countries?.let {
+    private fun observeFilteredCountries() {
+        countryViewModel.filteredCountryLiveData.observe(this) { filteredCountries ->
+            filteredCountries?.let {
                 countryAdapter.updateData(it)
             }
         }
-    }
-
-    private fun filterCountries(query: String?) {
-        val filteredCountries = countryViewModel.countryLiveData.value?.filter { country ->
-            country.commonName.contains(query ?: "", ignoreCase = true)
-        } ?: emptyList()
-        countryAdapter.updateData(filteredCountries)
     }
 }
