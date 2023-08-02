@@ -22,7 +22,14 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         setupSearchView()
         countryViewModel.fetchCountries()
+        observeFetchingLiveData()
         observeFilteredCountries()
+    }
+
+    private fun observeFetchingLiveData() {
+        countryViewModel.fetchingLiveData.observe(this) { isFetching ->
+            binding.swipeRefreshLayout.isRefreshing = isFetching
+        }
     }
 
     private fun setupViews() {
@@ -40,6 +47,10 @@ class MainActivity : AppCompatActivity() {
         }
         binding.countriesRecyclerView.adapter = countryAdapter
         binding.countriesRecyclerView.layoutManager = LinearLayoutManager(this)
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            countryViewModel.fetchCountries()
+        }
     }
 
     private fun setupSearchView() {

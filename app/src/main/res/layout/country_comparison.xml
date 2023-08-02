@@ -40,21 +40,21 @@
                     <TextView
                         android:id="@+id/initialCountryDetailsTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/initialCountryPopulationTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/initialCountryAreaTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
 
@@ -149,21 +149,21 @@
                     <TextView
                         android:id="@+id/secondCountryDetailsTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/secondCountryPopulationTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/secondCountryAreaTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
 

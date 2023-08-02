@@ -21,13 +21,16 @@ class CountryDetails : AppCompatActivity() {
 
         selectedCountry?.let {
             binding.countryNameTextView.text = it.commonName
-            binding.countryCapitalTextView.text = getString(R.string.capital_format, it.formattedCapital)
-            binding.countryPopulationTextView.text = getString(R.string.population_format, it.population.toString())
+            binding.countryCapitalTextView.text =
+                getString(R.string.capital_format, it.formattedCapital)
+            binding.countryPopulationTextView.text =
+                getString(R.string.population_format, it.population.toString())
             binding.countryAreaTextView.text = getString(R.string.area_format, it.area.toString())
 
             val languages = it.languages
             val languagesString = languages?.values?.joinToString(", ")
-            binding.countryLanguagesTextView.text = getString(R.string.languages_format, languagesString)
+            binding.countryLanguagesTextView.text =
+                getString(R.string.languages_format, languagesString)
 
             val currencies = it.currencies
             if (!currencies.isNullOrEmpty()) {
@@ -35,7 +38,8 @@ class CountryDetails : AppCompatActivity() {
                 val firstCurrency = currencies[firstCurrencyCode]
                 val currencyName = firstCurrency?.name
                 val currencySymbol = firstCurrency?.symbol
-                binding.countryCurrencyTextView.text = getString(R.string.currency_format, currencyName, currencySymbol)
+                binding.countryCurrencyTextView.text =
+                    getString(R.string.currency_format, currencyName, currencySymbol)
             }
 
             val flagUrl = it.flags?.png

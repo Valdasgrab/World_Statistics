@@ -30,14 +30,21 @@ class SelectCountryActivity : AppCompatActivity() {
         setupSearchView()
         countryViewModel.initializeFilter()
         observeFilteredCountries()
+        observeFetchingLiveData()
         countryViewModel.fetchCountries()
     }
 
+    private fun observeFetchingLiveData() {
+        countryViewModel.fetchingLiveData.observe(this) { isFetching ->
+            binding.swipeRefreshLayoutComparison.isRefreshing = isFetching
+        }
+    }
+
     private fun setupViews() {
-        binding.searchView.queryHint = "Search countries"
-        binding.searchView.setOnClickListener {
-            binding.searchView.isIconified = false
-            binding.searchView.requestFocus()
+        binding.searchViewComparison.queryHint = "Search countries"
+        binding.searchViewComparison.setOnClickListener {
+            binding.searchViewComparison.isIconified = false
+            binding.searchViewComparison.requestFocus()
         }
     }
 
@@ -49,10 +56,14 @@ class SelectCountryActivity : AppCompatActivity() {
         }
         binding.countriesRecyclerViewComparison.adapter = countryAdapter
         binding.countriesRecyclerViewComparison.layoutManager = LinearLayoutManager(this)
+        binding.swipeRefreshLayoutComparison.setOnRefreshListener {
+            countryViewModel.fetchCountries()
+        }
     }
 
     private fun setupSearchView() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchViewComparison.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
