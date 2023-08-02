@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -69,7 +68,7 @@
                     <TextView
                         android:id="@+id/initialCountryLanguageTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="140dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
 
@@ -86,11 +85,18 @@
                             android:layout_height="wrap_content"
                             android:text="Flag" />
 
-                        <ImageView
-                            android:id="@+id/initialFlagImageView"
+                        <FrameLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="190dp"
-                            android:padding="5dp" />
+                            android:layout_height="wrap_content"
+                            android:background="#D3D3D3"
+                            android:padding="5dp">
+
+                            <ImageView
+                                android:id="@+id/initialFlagImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="190dp"
+                                android:padding="5dp" />
+                        </FrameLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -108,13 +114,20 @@
                             android:layout_height="wrap_content"
                             android:text="Coat of Arms" />
 
-                        <ImageView
-                            android:id="@+id/initialCoatOfArmsImageView"
+                        <FrameLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="190dp"
-                            android:layout_below="@id/flagLayout"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginBottom="50dp"/>
+                            android:layout_height="wrap_content"
+                            android:background="#D3D3D3"
+                            android:padding="5dp">
+
+                            <ImageView
+                                android:id="@+id/initialCoatOfArmsImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="190dp"
+                                android:layout_below="@id/flagLayout"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="50dp" />
+                        </FrameLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -164,9 +177,10 @@
                     <TextView
                         android:id="@+id/secondCountryLanguageTextView"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="140dp"
                         android:padding="8dp"
                         android:textSize="18sp" />
+
                     <LinearLayout
                         android:id="@+id/secondFlagLayout"
                         android:layout_width="match_parent"
@@ -180,11 +194,18 @@
                             android:layout_height="wrap_content"
                             android:text="Flag" />
 
-                        <ImageView
-                            android:id="@+id/secondFlagImageView"
+                        <FrameLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="190dp"
-                            android:padding="5dp" />
+                            android:layout_height="wrap_content"
+                            android:background="#D3D3D3"
+                            android:padding="5dp">
+
+                            <ImageView
+                                android:id="@+id/secondFlagImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="190dp"
+                                android:padding="5dp" />
+                        </FrameLayout>
                     </LinearLayout>
 
                     <LinearLayout
@@ -202,13 +223,21 @@
                             android:layout_height="wrap_content"
                             android:text="Coat of Arms" />
 
-                        <ImageView
-                            android:id="@+id/secondCoatOfArmsImageView"
+                        <FrameLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="190dp"
-                            android:layout_below="@id/flagLayout"
-                            android:layout_marginTop="16dp"
-                            android:layout_marginBottom="50dp"/>
+                            android:layout_height="wrap_content"
+
+                            android:background="#D3D3D3"
+                            android:padding="5dp">
+
+                            <ImageView
+                                android:id="@+id/secondCoatOfArmsImageView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="190dp"
+                                android:layout_below="@id/flagLayout"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="50dp" />
+                        </FrameLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
