@@ -27,16 +27,18 @@ class SelectCountryViewModel: ViewModel() {
 
     fun fetchCountries() {
         _fetchingLiveData.value = true
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val countries = countryRepository.fetchCountries()
                 val sortedCountries = countries.sortedBy { it.commonName }
-                _countryLiveData.value = sortedCountries
-                _filteredCountryLiveData.value = sortedCountries
+                withContext(Dispatchers.Main) {
+                    _countryLiveData.value = sortedCountries
+                    _filteredCountryLiveData.value = sortedCountries
+                }
             } catch (e: Exception) {
-                e.stackTrace
+                e.printStackTrace()
             } finally {
-                _fetchingLiveData.value = false
+                _fetchingLiveData.postValue(false)
             }
         }
     }
