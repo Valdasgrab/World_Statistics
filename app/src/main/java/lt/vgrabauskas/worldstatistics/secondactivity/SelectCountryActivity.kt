@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import lt.vgrabauskas.worldstatistics.CountryAdapter
 import lt.vgrabauskas.worldstatistics.databinding.ActivitySelectCountryBinding
 import lt.vgrabauskas.worldstatistics.repository.Country
+import lt.vgrabauskas.worldstatistics.repository.CountryRepository
 
 class SelectCountryActivity : AppCompatActivity() {
 
@@ -17,13 +18,15 @@ class SelectCountryActivity : AppCompatActivity() {
     private lateinit var initialCountry: Country
     private lateinit var selectedCountry: Country
     private lateinit var countryAdapter: CountryAdapter
-    private val countryViewModel: SelectCountryViewModel by viewModels()
+    private lateinit var countryViewModel: SelectCountryViewModel
+    private val countryRepository: CountryRepository = CountryRepository.instance
     private var isCountrySelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySelectCountryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        countryViewModel = SelectCountryViewModel(countryRepository)
         initialCountry = intent.getParcelableExtra("selectedCountry")!!
         setupViews()
         setupRecyclerView()

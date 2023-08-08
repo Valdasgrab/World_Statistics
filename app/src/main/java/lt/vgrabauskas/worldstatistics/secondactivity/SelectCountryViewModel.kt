@@ -10,8 +10,8 @@ import kotlinx.coroutines.withContext
 import lt.vgrabauskas.worldstatistics.repository.Country
 import lt.vgrabauskas.worldstatistics.repository.CountryRepository
 
-class SelectCountryViewModel: ViewModel() {
-    private val countryRepository: CountryRepository = CountryRepository.instance
+class SelectCountryViewModel(private val countryRepository: CountryRepository): ViewModel() {
+
     private val _countryLiveData = MutableLiveData<List<Country>>(mutableListOf())
     private val _filteredCountryLiveData = MutableLiveData<List<Country>>()
     private val _fetchingLiveData = MutableLiveData<Boolean>()

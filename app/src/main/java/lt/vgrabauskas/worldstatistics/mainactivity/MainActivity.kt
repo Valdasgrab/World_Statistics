@@ -2,15 +2,16 @@ package lt.vgrabauskas.worldstatistics.mainactivity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import lt.vgrabauskas.worldstatistics.CountryAdapter
 import lt.vgrabauskas.worldstatistics.databinding.ActivityMainBinding
+import lt.vgrabauskas.worldstatistics.repository.CountryRepository
 
 class MainActivity : AppCompatActivity() {
-    private val countryViewModel: CountryViewModel by viewModels()
+    private val countryRepository: CountryRepository = CountryRepository.instance
+    private lateinit var countryViewModel: CountryViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var countryAdapter: CountryAdapter
 
@@ -18,6 +19,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        countryViewModel = CountryViewModel(countryRepository)
         setupViews()
         setupRecyclerView()
         setupSearchView()
