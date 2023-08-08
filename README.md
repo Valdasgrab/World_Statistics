@@ -11,7 +11,7 @@ if the selected country has a coat of arms.
 - Search and filter countries by name.
 - Get country details upon selection.
 - Compare two selected countries side to side.
-- 
+
 
 ## Prerequisites
 
@@ -27,6 +27,7 @@ git clone https://github.com/Valdasgrab/World_Statistics.git
 3. Sync the Gradle files.
 4. Run the app on an emulator or a physical device of your choice.
 
+
 ## Usage
 
 1. Launch the app to see the list of countries.
@@ -34,7 +35,8 @@ git clone https://github.com/Valdasgrab/World_Statistics.git
 3. Tap on a country to view detailed statistics.
 4. Compare two selected countries by pressing "Compare" button and selecting the second country from the list for comparison.
 
+
 ## Acknowledgments
 
-This project is using REST COUNTRIES API (https://restcountries.com/) to fetch country information.
-This project is using Glide (https://github.com/bumptech/glide) in order to load images from the API.
+- This project is using REST COUNTRIES API (https://restcountries.com/) to fetch country information.
+- This project is using Glide (https://github.com/bumptech/glide) in order to load images from the API.
