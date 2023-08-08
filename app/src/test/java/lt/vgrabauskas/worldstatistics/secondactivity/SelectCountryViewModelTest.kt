@@ -1,4 +1,4 @@
-package lt.vgrabauskas.worldstatistics.mainactivity
+package lt.vgrabauskas.worldstatistics.secondactivity
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
@@ -7,12 +7,13 @@ import androidx.lifecycle.Observer
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
-import junit.framework.Assert.assertEquals
+import junit.framework.Assert
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
+import lt.vgrabauskas.worldstatistics.secondactivity.SelectCountryViewModel
 import lt.vgrabauskas.worldstatistics.repository.Country
 import lt.vgrabauskas.worldstatistics.repository.CountryRepository
 import org.junit.Before
@@ -22,19 +23,35 @@ import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 @ExperimentalCoroutinesApi
-class CountryViewModelTest {
+class SelectCountryViewModelTest {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
-    private lateinit var viewModel: CountryViewModel
-    private val testDispatcher = TestCoroutineDispatcher()
+
+    private lateinit var viewModel: SelectCountryViewModel
     private lateinit var mockCountryRepository: CountryRepository
+    private val testDispatcher = TestCoroutineDispatcher()
 
     @Before
     fun setup() {
         mockCountryRepository = mockk()
         Dispatchers.setMain(testDispatcher)
-        viewModel = CountryViewModel(mockCountryRepository)
+        viewModel = SelectCountryViewModel(mockCountryRepository)
+    }
+
+    @Test
+    fun testInitializeFilter() {
+        val countries = listOf(
+            Country(Country.CountryName("Country 1"), null, 1000000, null, null, null, null, null),
+            Country(Country.CountryName("Country 2"), null, 2000000, null, null, null, null, null)
+        )
+        viewModel.initializeFilter()
+        val countryLiveDataField = SelectCountryViewModel::class.java.getDeclaredField("_countryLiveData")
+        countryLiveDataField.isAccessible = true
+        countryLiveDataField.set(viewModel, MutableLiveData(countries))
+        viewModel.initializeFilter()
+        val filteredCountries = LiveDataTestUtil.getValue(viewModel.filteredCountryLiveData)
+        Assert.assertEquals(countries, filteredCountries)
     }
 
     @Test
@@ -93,22 +110,6 @@ class CountryViewModelTest {
         coVerify { fetchingObserver.onChanged(true) }
         coVerify { fetchingObserver.onChanged(false) }
     }
-    @Test
-    fun testFilterCountries_QueryMatchesCountry() = testDispatcher.runBlockingTest {
-        val countries = listOf(
-            Country(Country.CountryName("Country 1"), null, 1000000, null, null, null, null, null),
-            Country(Country.CountryName("Country 2"), null, 2000000, null, null, null, null, null)
-        )
-        val countryLiveData = MutableLiveData<List<Country>>()
-        countryLiveData.value = countries
-        val countryLiveDataField = CountryViewModel::class.java.getDeclaredField("_countryLiveData")
-        countryLiveDataField.isAccessible = true
-        countryLiveDataField.set(viewModel, countryLiveData)
-        val query = "Country 1"
-        viewModel.filterCountries(query)
-        val filteredCountries = LiveDataTestUtil.getValue(viewModel.filteredCountryLiveData)
-        assertEquals(listOf(countries[0]), filteredCountries)
-    }
 
     @Test
     fun testFilterCountries_EmptyQuery_ReturnsAllCountries() = testDispatcher.runBlockingTest {
@@ -118,13 +119,29 @@ class CountryViewModelTest {
         )
         val countryLiveData = MutableLiveData<List<Country>>()
         countryLiveData.value = countries
-        val countryLiveDataField = CountryViewModel::class.java.getDeclaredField("_countryLiveData")
+        val countryLiveDataField = SelectCountryViewModel::class.java.getDeclaredField("_countryLiveData")
         countryLiveDataField.isAccessible = true
         countryLiveDataField.set(viewModel, countryLiveData)
         val emptyQuery = ""
         viewModel.filterCountries(emptyQuery)
         val filteredCountries = LiveDataTestUtil.getValue(viewModel.filteredCountryLiveData)
-        assertEquals(countries, filteredCountries)
+        Assert.assertEquals(countries, filteredCountries)
+    }
+
+    @Test
+    fun testFilterCountries_QueryMatchesCountry() {
+        val countries = listOf(
+            Country(Country.CountryName("Country 1"), null, 1000000, null, null, null, null, null),
+            Country(Country.CountryName("Country 2"), null, 2000000, null, null, null, null, null)
+        )
+        val countryLiveDataField = SelectCountryViewModel::class.java.getDeclaredField("_countryLiveData")
+        countryLiveDataField.isAccessible = true
+        countryLiveDataField.set(viewModel, MutableLiveData(countries))
+        val query = "Country 1"
+        viewModel.filterCountries(query)
+        val filteredCountries = LiveDataTestUtil.getValue(viewModel.filteredCountryLiveData)
+        val expectedFilteredCountries = listOf(countries[0])
+        Assert.assertEquals(expectedFilteredCountries, filteredCountries)
     }
 
     @Test
@@ -135,13 +152,13 @@ class CountryViewModelTest {
         )
         val countryLiveData = MutableLiveData<List<Country>>()
         countryLiveData.value = countries
-        val countryLiveDataField = CountryViewModel::class.java.getDeclaredField("_countryLiveData")
+        val countryLiveDataField = SelectCountryViewModel::class.java.getDeclaredField("_countryLiveData")
         countryLiveDataField.isAccessible = true
         countryLiveDataField.set(viewModel, countryLiveData)
         val query = "XYZ"
         viewModel.filterCountries(query)
         val filteredCountries = LiveDataTestUtil.getValue(viewModel.filteredCountryLiveData)
-        assertEquals(emptyList<Country>(), filteredCountries)
+        Assert.assertEquals(emptyList<Country>(), filteredCountries)
     }
 }
 object LiveDataTestUtil {
